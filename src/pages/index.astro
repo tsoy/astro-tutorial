@@ -1,4 +1,9 @@
 ---
+import "../styles/global.css"
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+
 const pageTitle = "Home Page"
 ---
 
@@ -11,15 +16,12 @@ const pageTitle = "Home Page"
     <title>😱 {pageTitle}</title>
 </head>
 <body>
-<nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-		<li><a href="/blog">Blog</a></li>
-
-    </ul>
-</nav>
+<Header/>
 <h1>{pageTitle}</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, placeat!</p>
+<Footer/>
+<script>
+    import "../scripts/menu"
+</script>
 </body>
 </html>
