@@ -1,8 +1,5 @@
 ---
-import "../styles/global.css"
-import Navigation from "../components/Navigation.astro"
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "About me"
 const identity = {
@@ -22,50 +19,37 @@ const font_weight = "bold"
 const text_case = "uppercase"
 ---
 
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-    <meta name="viewport" content="width=device-width"/>
-    <meta name="generator" content={Astro.generator}/>
-    <title>{pageTitle}</title>
-    <style define:vars={{skill_color, font_weight, text_case}}>
-        h1 {
-            font-size: 4rem;
-            color: purple;
-        }
-
-        .skill {
-            color: var(--skill_color);
-            font-weight: var(--font_weight);
-            text-transform: var(--text_case);
-        }
-    </style>
-</head>
-<body>
-<Header/>
-<h1>{pageTitle}</h1>
-<p>Here are a few facts about me:</p>
-<ul>
-    <li>My name is {identity.name}.</li>
-    <li>I live in {identity.country} and I work as {identity.occupation}.</li>
-    {
-        identity.hobbies.length > 1 &&
-            <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+<style define:vars={{skill_color, font_weight, text_case}} is:global>
+    h1 {
+        font-size: 4rem;
+        color: purple;
     }
-</ul>
-<p>My skills are:</p>
-<ul>
-    {identity.skills.map(s =>
-            <li class="skill">{s}</li>)}
-</ul>
 
-{happy && <p>I am happy to play astrobot</p>}
-{finished && <p>I finished this tutorial </p>}
-{goal_days === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days </p>}
-<Footer/>
-<script>
-    import "../scripts/menu"
-</script>
-</body>
-</html>
+    .skill {
+        color: var(--skill_color);
+        font-weight: var(--font_weight);
+        text-transform: var(--text_case);
+    }
+</style>
+
+<BaseLayout pageTitle={pageTitle}>
+    <p>Here are a few facts about me:</p>
+    <ul>
+        <li>My name is {identity.name}.</li>
+        <li>I live in {identity.country} and I work as {identity.occupation}.</li>
+        {
+            identity.hobbies.length > 1 &&
+                <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+        }
+    </ul>
+    <p>My skills are:</p>
+    <ul>
+        {identity.skills.map(s =>
+                <li class="skill">{s}</li>)}
+    </ul>
+
+    {happy && <p>I am happy to play astrobot</p>}
+    {finished && <p>I finished this tutorial </p>}
+    {goal_days === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days </p>}
+
+</BaseLayout>
