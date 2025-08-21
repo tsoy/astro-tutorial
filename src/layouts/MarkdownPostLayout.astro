@@ -1,35 +1,17 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import Tags from "../components/Tags.astro";
 const {frontmatter: fm} = Astro.props;
 let date = "";
 if (fm.pubDate) {
     date = new Date(fm.pubDate).toLocaleDateString()
 }
 ---
-<style>
-    .tag {
-        font-style: italic;
-        padding: 0.2em 0.4em;
-        background-color: lightgrey;
-        margin-top: 1em
-    }
-
-    .tag + .tag {
-        margin-left: 0.3em
-    }
-</style>
 <BaseLayout pageTitle={fm.title}>
-    <!--<meta charset="utf-8"/>-->
-    <!--<h1>{fm.title}</h1>-->
     <p><em>{fm.description}</em></p>
-
     <p>Written by {fm.author}</p>
     {date && <p>Published on: {date}</p>}
-    <!--{JSON.stringify(frontmatter)}-->
     {fm.image && <img width="300" src={fm.image.url} alt={fm.image.alt}/>}
-    <div>
-        {fm.tags.map((t: string) => <span class="tag">{t}</span>)}
-    </div>
-    <!--<img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt}/>-->
+    <Tags tags={fm.tags}/>
     <slot/>
 </BaseLayout>
